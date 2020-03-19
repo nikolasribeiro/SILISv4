@@ -6,3 +6,5 @@ Este sistema de liquidacion de sueldos es un proyecto personal mio que busca aut
 En futuras actualizaciones ire añadiendo la posibilidad de programar las liquidaciones a una fecha y hora deseada y se podran liquidar despidos, licencias, vacacionales, aguinaldos y descuentos opcionales que tenga el trabajador.
 
 Espero que les guste y sean libres de ver el codigo!
+
+NOTA: Para que el sistema funcione, es necesario crear una carpeta llamada "Recibos" en el mismo directorio donde descarguen los archivos. Esa carpeta es la carpeta destino donde se colocaran los recibos de sueldo que se liquiden, por el momento son archivos.txt pero estoy trabajando para generar archivos PDF con un diseño estandar.
