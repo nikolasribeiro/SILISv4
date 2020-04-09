@@ -31,7 +31,20 @@ class Trabajador:
         Hijos Disca:        {10}
         Conyuge:            {11}
         Conyuge Disca:      {12}
-        """.format(self.identificador, self.fecha_ingreso, self.tipo, self.sueldo, self.hs_simples, self.hs_ext, self.hs_ext_esp, self.hs_noct, self.jornada_esp, self.hijos, self.hijos_disca, self.conyuge, self.conyugeDisca)
+        """.format(
+            self.identificador, 
+            self.fecha_ingreso, 
+            self.tipo, 
+            self.sueldo, 
+            self.hs_simples, 
+            self.hs_ext, 
+            self.hs_ext_esp, 
+            self.hs_noct, 
+            self.jornada_esp, 
+            self.hijos, 
+            self.hijos_disca, 
+            self.conyuge, 
+            self.conyugeDisca)
 
     def mensual(self):
         sueldo_nominal = self.sueldo
@@ -75,6 +88,7 @@ class Trabajador:
         nominalBruto = jornales + totalextras + totalEspeciales
         nominalDescuento = jornales + totalextras + totalEspeciales
 
+        """
         print("================================")
         print("Tipo de trabajador: ",self.tipo)
         print("$xHora: ",hora)
@@ -85,6 +99,7 @@ class Trabajador:
         print("Nominal Bruto: ", nominalBruto)
         print("Nominal Descuento ", nominalDescuento)
         print("================================")
+        """
 
         if nocturnas != 0:
             nominalBruto = jornales + totalextras + totalEspeciales + totalNocturnas
@@ -267,7 +282,40 @@ class Trabajador:
     ║                                                                                           ║
     ║    Firma: ______________________________________________________                          ║
     ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
-        """.format(data[1],data[2],data[6],data[0], 'fecha de hoy', self.hs_simples, self.calculo_hora(),  jornales, self.hs_ext, self.calculo_hora(),  totalextras, self.hs_ext_esp, self.calculo_hora(),  totalEspeciales, self.hs_noct, self.calculo_hora(),  totalNocturnas, self.jornada_esp,  totalJornadaEspecial,  totalJornadaEspecial, nominalDescuento, "15%",  descBPS, "4.5%",  descFonasa, "0.125%",  descFRL,  irpf,  liquido1,  liquidoreal,   'Fecha de hoy', hora2, data[3])
+        """.format(
+            data[1],
+            data[2],
+            data[6],
+            data[0], 
+            'fecha de hoy', 
+            self.hs_simples, 
+            self.calculo_hora(),  
+            jornales, 
+            self.hs_ext, 
+            self.calculo_hora(),  
+            totalextras, 
+            self.hs_ext_esp, 
+            self.calculo_hora(),  
+            totalEspeciales, 
+            self.hs_noct, 
+            self.calculo_hora(),  
+            totalNocturnas, 
+            self.jornada_esp,  
+            totalJornadaEspecial,  
+            totalJornadaEspecial, 
+            nominalDescuento, 
+            "15%",  
+            descBPS, 
+            "4.5%",  
+            descFonasa, 
+            "0.125%",  
+            descFRL,  
+            irpf,  
+            liquido1,  
+            liquidoreal,   
+            'Fecha de hoy', 
+            hora2, 
+            data[3])
         )
         #print(data[1])
         recibo.close()

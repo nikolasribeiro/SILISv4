@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, Qt
 import time
 import core
-import data_base
+import DATABASE.data_base as data_base
 
 baseEjemplo = data_base.getID()
 datosUsuario = data_base.displayInfo()
@@ -14,7 +14,7 @@ datosUsuario = data_base.displayInfo()
 class GestorGUI(QMainWindow):
     def __init__(self):
         super(QMainWindow, self).__init__()
-        uic.loadUi("gui_gestor_base.ui", self)
+        uic.loadUi("GUI/gui_gestor_base.ui", self)
         self.setFixedSize(1331, 700)
         self.btn_limpiar.clicked.connect(self.limpiar)
         self.btn_anadir.clicked.connect(self.anadir)
@@ -59,7 +59,23 @@ class GestorGUI(QMainWindow):
         #print("Este mensaje deberia de aparecer desde la ventana PRINCIPAL")
         if(len( self.txt_id.text() )!=0):
             print(self.txt_fecha_ingreso.text())
-            data_base.addInfo(self.txt_fecha_ingreso.text(), self.txt_tipo.text(), self.txt_nombre.text(), self.txt_apellido.text(), self.txt_cedula.text(), self.txt_valorHora.text(), self.txt_hsSimples.text(), self.txt_horasExtras.text(), self.txt_hs_ext_esp.text(), self.txt_hsNocturnas.text(), self.txt_jornadaEsp.text(), self.txt_hijosCargo.text(), self.lineEdit.text(), conyuge, conyugeDisca)
+            
+            data_base.addInfo(
+                self.txt_fecha_ingreso.text(), 
+                self.txt_tipo.text(), 
+                self.txt_nombre.text(), 
+                self.txt_apellido.text(), 
+                self.txt_cedula.text(), 
+                self.txt_valorHora.text(), 
+                self.txt_hsSimples.text(), 
+                self.txt_horasExtras.text(), 
+                self.txt_hs_ext_esp.text(), 
+                self.txt_hsNocturnas.text(), 
+                self.txt_jornadaEsp.text(), 
+                self.txt_hijosCargo.text(), 
+                self.lineEdit.text(), 
+                conyuge, 
+                conyugeDisca)
 
     def mostrar(self):
         global baseEjemplo

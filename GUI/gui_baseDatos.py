@@ -11,11 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt, QTimer
 
-import nombres
-import apellidos
+import src.nombres
+import src.apellidos
 import random
 
-import data_base
+import DATABASE.data_base as data_base
 baseEjemplo = data_base.getID()
 datosUsuario = data_base.displayInfo()
 

@@ -5,9 +5,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, Qt
 import time
 import core
-from gui_baseDatos import Ui_root_gestor
+from GUI.gui_baseDatos import Ui_root_gestor
 import gestor_datos
-import data_base
+import DATABASE.data_base as data_base
 
 baseEjemplo = data_base.getID()
 datosUsuario = data_base.displayInfo()
@@ -32,7 +32,7 @@ def corroborarBooleanos(dato, dato1):
 class MainGUI(QMainWindow):
     def __init__(self):
         super(QMainWindow, self).__init__()
-        uic.loadUi("gui_raw.ui", self)
+        uic.loadUi("GUI/gui_raw.ui", self)
 
         #Seteamos valor iniciales de grafica
         self.txt_valorHora.setPlaceholderText("En caso MENSUAL, colocar Nominal")
@@ -87,19 +87,20 @@ class MainGUI(QMainWindow):
         else:
             conyuge_disc = False
 
-        obj = core.Trabajador(identificador=self.txt_trabajadorID.text(),
-                              fecha_ingreso=self.txt_fechaIngreso.text(),
-                              tipo=self.txt_tipoTrabajador.text(),
-                              sueldo=self.txt_valorHora.text(),
-                              hs_simples=self.txt_hs_simples.text(),
-                              hs_ext=self.txt_hs_Ext.text(),
-                              hs_ext_esp=self.txt_hs_ext_esp.text(),
-                              hs_noct=self.txt_horas_noc.text(),
-                              jornada_esp=self.txt_jornadaEsp.text(),
-                              hijos=self.txt_hijos.text(),
-                              hijos_disca=self.txt_discapacitados.text(),
-                              conyuge=conyuge,
-                              conyugeDisca=conyuge_disc)
+        obj = core.Trabajador(
+            identificador = self.txt_trabajadorID.text(),
+            fecha_ingreso = self.txt_fechaIngreso.text(),
+            tipo          = self.txt_tipoTrabajador.text(),
+            sueldo        = self.txt_valorHora.text(),
+            hs_simples    = self.txt_hs_simples.text(),
+            hs_ext        = self.txt_hs_Ext.text(),
+            hs_ext_esp    = self.txt_hs_ext_esp.text(),
+            hs_noct       = self.txt_horas_noc.text(),
+            jornada_esp   = self.txt_jornadaEsp.text(),
+            hijos         = self.txt_hijos.text(),
+            hijos_disca   = self.txt_discapacitados.text(),
+            conyuge       = conyuge,
+            conyugeDisca  = conyuge_disc)
 
 
         self.lbl_liquido.setText("$ " + str( round(obj.liquidar()[0]) ) )
@@ -217,7 +218,22 @@ class MainGUI(QMainWindow):
 
             self.progressBar.setValue(i)
 
-            obj = core.Trabajador(identificador=self.txt_trabajadorID.text(), fecha_ingreso=self.txt_fechaIngreso.text(), tipo=self.txt_tipoTrabajador.text(), sueldo=self.txt_valorHora.text(), hs_simples=self.txt_hs_simples.text(), hs_ext=self.txt_hs_Ext.text(), hs_ext_esp=self.txt_hs_ext_esp.text(), hs_noct=self.txt_horas_noc.text(), jornada_esp=self.txt_jornadaEsp.text(), hijos=self.txt_hijos.text(), hijos_disca=self.txt_discapacitados.text(),conyuge=conyuge, conyugeDisca=conyuge_disc)
+            obj = core.Trabajador(
+                identificador       = self.txt_trabajadorID.text(), 
+                fecha_ingreso       = self.txt_fechaIngreso.text(), 
+                tipo                = self.txt_tipoTrabajador.text(), 
+                sueldo              = self.txt_valorHora.text(), 
+                hs_simples          = self.txt_hs_simples.text(), 
+                hs_ext              = self.txt_hs_Ext.text(), 
+                hs_ext_esp          = self.txt_hs_ext_esp.text(), 
+                hs_noct             = self.txt_horas_noc.text(), 
+                jornada_esp         = self.txt_jornadaEsp.text(), 
+                hijos               = self.txt_hijos.text(), 
+                hijos_disca         = self.txt_discapacitados.text(),
+                conyuge             = conyuge, 
+                conyugeDisca        = conyuge_disc)
+            
+            
             self.lbl_liquido.setText("$ " + str( round(obj.liquidar()[0]) ) )
             self.txt_bps.setText( str( round(obj.liquidar()[1]) ) )
             self.txt_fonasa.setText( str( round(obj.liquidar()[2]) ) )
