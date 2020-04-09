@@ -51,7 +51,6 @@ class MainGUI(QMainWindow):
         timer.start(1000)               #1000 = 1 > 1 min = 60 ->
         #Final timer reloj
 
-
     def tick(self):
         global hora1
         global hora2
@@ -67,7 +66,7 @@ class MainGUI(QMainWindow):
             minutosReloj = time.strftime("%M")
             segundosReloj = time.strftime("%S")
             horasReloj = time.strftime("%H")
-            #print(hora2)
+            print(hora2)
         return hora2
 
     def mostrarGestor(self):
@@ -108,6 +107,30 @@ class MainGUI(QMainWindow):
         self.txt_fonasa.setText( str( round(obj.liquidar()[2]) ) )
         self.txt_frl.setText( str( round(obj.liquidar()[3]) ) )
 
+        obj.reciboSueldo(
+                data                 = data,
+                jornales             = str( round(obj.liquidar()[4]) ),
+                totalextras          = str( round(obj.liquidar()[5]) ),
+                totalEspeciales      = str( round(obj.liquidar()[5]) ),
+                totalNocturnas       = str( round(obj.liquidar()[6]) ),
+                totalJornadaEspecial = str( round(obj.liquidar()[7]) ),
+                nominalDescuento     = str( round(obj.liquidar()[10]) ),
+                irpf                 = str( round(obj.liquidar()[11]) ),
+                liquidoreal          = str( round(obj.liquidar()[12]) ),
+                descBPS              = str( round(obj.liquidar()[1]) ),
+                descFonasa           = str( round(obj.liquidar()[2]) ),
+                descFRL              = str( round(obj.liquidar()[3]) ),
+                descGral             = str( round(obj.liquidar()[14]) ),
+                liquido1             = str( round(obj.liquidar()[13]) ),
+                hora2                = self.tick,
+                nombre               = data[3],
+                apellido             = data[4],
+                tipo                 = data[2],
+                iD                   = data[0]
+                )
+
+        obj.liquidar()
+        
     def mostrarListado(self):
         global baseEjemplo
         global datosUsuario
@@ -243,19 +266,19 @@ class MainGUI(QMainWindow):
 
             obj.reciboSueldo(
                 data                 = data,
-                jornales             = str( round(obj.liquidar()[4]) ),
-                totalextras          = str( round(obj.liquidar()[5]) ),
+                jornales             = str( round(obj.liquidar()[3]) ),
+                totalextras          = str( round(obj.liquidar()[4]) ),
                 totalEspeciales      = str( round(obj.liquidar()[5]) ),
                 totalNocturnas       = str( round(obj.liquidar()[6]) ),
                 totalJornadaEspecial = str( round(obj.liquidar()[7]) ),
-                nominalDescuento     = str( round(obj.liquidar()[10]) ),
-                irpf                 = str( round(obj.liquidar()[11]) ),
-                liquidoreal          = str( round(obj.liquidar()[12]) ),
-                descBPS              = str( round(obj.liquidar()[1]) ),
-                descFonasa           = str( round(obj.liquidar()[2]) ),
-                descFRL              = str( round(obj.liquidar()[3]) ),
-                descGral             = str( round(obj.liquidar()[14]) ),
-                liquido1             = str( round(obj.liquidar()[13]) ),
+                nominalDescuento     = str( round(obj.liquidar()[9]) ),
+                irpf                 = str( round(obj.liquidar()[10]) ),
+                liquidoreal          = str( round(obj.liquidar()[11]) ),
+                descBPS              = str( round(obj.liquidar()[0]) ),
+                descFonasa           = str( round(obj.liquidar()[1]) ),
+                descFRL              = str( round(obj.liquidar()[2]) ),
+                descGral             = str( round(obj.liquidar()[13]) ),
+                liquido1             = str( round(obj.liquidar()[12]) ),
                 hora2                = self.tick,
                 nombre               = data[3],
                 apellido             = data[4],

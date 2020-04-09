@@ -1,4 +1,23 @@
+import pdfkit
 
+""" 
+        Valores del data
+        data[0]     = ID del trabajador
+        data[1]     = fecha de ingreso del trabajador
+        data[2]     = Tipo de trabajador
+        data[3]     = Nombre del trabajador
+        data[4]     = Apellido del trabajador
+        data[5]     = cedula del trabajador
+        data[6]     = valor de la hora
+        data[7]     = Horas Simples
+        data[8]     = Horas Extras
+        data[9]     = Extras especiales
+        data[10]    = Jornadas especiales
+        data[11]    = Hijos a cargo
+        data[12]    = Hijos Discapacitados
+        data[13]    = Conyuge Cargo
+        data[14]    = Conyuge cargo discapacitado
+"""
 
 class Trabajador:
     def __init__(self, identificador, fecha_ingreso, tipo, sueldo, hs_simples, hs_ext, hs_ext_esp, hs_noct, jornada_esp, hijos, hijos_disca, conyuge, conyugeDisca):
@@ -65,7 +84,7 @@ class Trabajador:
 
     def liquidar(self):
         # ================ Calculo nominal ========================
-        hora = float( self.calculo_hora() ) #El .text() te devuelve el valor que se encuentra dentro del entry
+        hora = float( self.calculo_hora() ) 
         base = float( self.hs_simples )
         extra = float( self.hs_ext )
         especiales = float( self.hs_ext_esp )
@@ -88,7 +107,7 @@ class Trabajador:
         nominalBruto = jornales + totalextras + totalEspeciales
         nominalDescuento = jornales + totalextras + totalEspeciales
 
-        """
+        
         print("================================")
         print("Tipo de trabajador: ",self.tipo)
         print("$xHora: ",hora)
@@ -99,7 +118,7 @@ class Trabajador:
         print("Nominal Bruto: ", nominalBruto)
         print("Nominal Descuento ", nominalDescuento)
         print("================================")
-        """
+        
 
         if nocturnas != 0:
             nominalBruto = jornales + totalextras + totalEspeciales + totalNocturnas
@@ -127,8 +146,7 @@ class Trabajador:
             nominalBruto = nominalBruto * 1.06
 
         if nominalBruto > 477710:
-            tabla1 = rango2 + rango3 + rango4 + rango5 + \
-                rango6 + rango7 + ((nominalBruto - 477710)*0.36)
+            tabla1 = rango2 + rango3 + rango4 + rango5 + rango6 + rango7 + ((nominalBruto - 477710)*0.36)
             #print("Rango 8",tabla1)
         if nominalBruto > 311550:
             tabla1 = rango2 + rango3 + rango4 + rango5 + rango6 + ((nominalBruto - 311550)*0.31)
@@ -179,16 +197,7 @@ class Trabajador:
         else:
             hijosDescuento = 5 * precioHijos
 
-        try:
-            if totalDiscap > totalhijos:
-                pass
-            else:
-                pass
-        except:
-            pass
-
-
-
+        
         if self.conyugeDisca == 1 or self.conyugeDisca == True:
             conyugeDisca = precioDiscapacitado
             totalDescuentoMasDisca = descGral + conyugeDisca + hijosDescuento
@@ -226,98 +235,154 @@ class Trabajador:
             liquidoreal = nominalDescuento - liquido1
 
 
-
-        return liquidoreal, descBPS, descFonasa, descFRL, jornales, totalextras, totalEspeciales, totalNocturnas, totalJornadaEspecial, nominalBruto, nominalDescuento, irpf, liquidoreal, liquido1, descGral
+            #   0           1           2           3       4       5               6               7                       8                   9           10           11    12          13                                    
+        return descBPS, descFonasa, descFRL, jornales, totalextras, totalEspeciales, totalNocturnas, totalJornadaEspecial, nominalBruto, nominalDescuento, irpf, liquidoreal, liquido1, descGral
 
     def reciboSueldo(self, data, jornales, totalextras, totalEspeciales, totalNocturnas, totalJornadaEspecial, nominalDescuento, irpf, liquidoreal, descBPS, descFonasa, descFRL, descGral, liquido1, hora2, nombre, apellido, tipo, iD):
+        
+        recibo = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Template</title>
+        <style>
+            .contenedor{{
+                border: 1px solid black;
+                width: 80%;
+            }}
+            .table-header{{
+                text-align: center;
+            }}
 
-        recibo = open("Recibos/{3} ,recibo sueldo {0} {1}, tipo: {2}, trabajador: {3}.txt".format(nombre, apellido, tipo, iD) , "w", encoding="utf-8")
-        recibo.write(
-    """
-    ╔══════════════════════════════════ DATOS EMPRESA ══════════════════════════════════════════╗
-    ║                                                                                           ║
-    ║   Empresa: AMMNI Software  RUT:  210326540017     Nro BPS: 1234567890  Nro MTSS: 98765432 ║
-    ║   Zonamerica, Perimetral y Ruta 8, MONTEVIDEO                                             ║
-    ║                                                                                           ║
-    ╠══════════════════════════════════ DATOS TRABAJADOR ═══════════════════════════════════════╣
-    ║                                                                                           ║
-    ║    Nombre: {0} {1}                   Documento: {32}      Ingreso: {2}                    ║
-    ║    Cargo: Programador Jr           Oficina: Zonamerica         Nro Funcionario: {3}       ║
-    ║    Fecha liquidacion: {4}           Tipo: JORNALERO                                       ║
-    ║                                                                                           ║
-    ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
-    ║    CONCEPTO                Cant                  Unid                     TOTAL           ║
-    ║                                                                                           ║
-    ║    Horas simples            {5}                   {6}                     {7}             ║
-    ║    Horas extras             {8}                   {9}                     {10}            ║
-    ║    Horas extras especiales  {11}                  {12}                    {13}            ║
-    ║    Horas Nocturnas          {14}                  {15}                    {16}            ║
-    ║    Feriado pago             {17}                  {18}                    {19}            ║
-    ║                                                                                           ║
-    ╠══════╦═══════════════════════════════════════════════════════════════════════════╦════════╣
-    ║      ║    TOTAL NOMINAL:                                                   {20}  ║        ║
-    ║      ╚═══════════════════════════════════════════════════════════════════════════╝        ║
-    ║                                                                                           ║
-    ║    BPS:                     {21}                                           {22}           ║
-    ║    Fonasa:                  {23}                                           {24}           ║
-    ║    FRL:                     {25}                                           {26}           ║
-    ║    IRPF:                                                                   {27}           ║
-    ╚══════╦═══════════════════════════════════════════════════════════════════════════╦════════╝
-           ║    TOTAL DESCUENTOS:                                                {28}  ║
-           ╠═══════════════════════════════════════════════════════════════════════════╣
-           ║    LIQUIDO A COBRAR:                                                {29}  ║
-           ╚═══════════════════════════════════════════════════════════════════════════╝
+            #datos-empresa{{
+                border: 1px solid black;
+            }}
 
-    ╔═══════════════════════════════════════════════════════════════════════════════════════════╗
-    ║                                       --- Via 1 ---                                       ║
-    ║    La empresa declara haber efectuado los aportes de seguridad social correspondientes a  ║
-    ║                        los haberes liquidados el mes anterior                             ║
-    ╠═══════════════════════════════════════════════════════════════════════════════════════════╣
-    ║                                                                                           ║
-    ╠════════════════════════════ Firma de conformidad del trabajador ══════════════════════════╣
-    ║                                                                                           ║
-    ║    Recibi el importe mencionado y las copias correspondientes a la liquidacion            ║
-    ║    Fecha liquidacion: {30}                                                                ║
-    ║    Hora liquidacion:  {31}                                                                ║
-    ║                                                                                           ║
-    ║    Firma: ______________________________________________________                          ║
-    ╚═══════════════════════════════════════════════════════════════════════════════════════════╝
-        """.format(
-            data[1],
-            data[2],
-            data[6],
-            data[0], 
-            'fecha de hoy', 
-            self.hs_simples, 
-            self.calculo_hora(),  
-            jornales, 
-            self.hs_ext, 
-            self.calculo_hora(),  
-            totalextras, 
-            self.hs_ext_esp, 
-            self.calculo_hora(),  
-            totalEspeciales, 
-            self.hs_noct, 
-            self.calculo_hora(),  
-            totalNocturnas, 
-            self.jornada_esp,  
-            totalJornadaEspecial,  
-            totalJornadaEspecial, 
-            nominalDescuento, 
-            "15%",  
-            descBPS, 
-            "4.5%",  
-            descFonasa, 
-            "0.125%",  
-            descFRL,  
-            irpf,  
-            liquido1,  
-            liquidoreal,   
-            'Fecha de hoy', 
-            hora2, 
-            data[3])
-        )
-        #print(data[1])
-        recibo.close()
+            
+        </style>
+        </head>
+        <body>
 
-        #self.lbl_LIQUIDO.setText(str(round(liquidoreal)))
+        <div class="contenedor">
+
+            <div id="datos-empresa">
+                <table border="0" width="100%" align="center">
+                    <h3 class="table-header">DATOS DE LA EMPRESA</h3>
+        
+                    <tr> <td>Empresa: AMMNI Software</td> <td>RUT: 210326540017</td> <td>BPS: 1234567890</td> <td>MTSS: 98765432</td></tr>
+                    <span> Direccion: Zonamerica, Perimetral y Ruta 8, Montevideo </span>
+                    
+                </table>
+            </div>
+
+            <div id="datos-trabajador">
+                <table border="0" width="100%" align="center">
+                    <h3 class="table-header">DATOS TRABAJADOR</h3>
+                    <tr> <td>Nombre: {nombre} {apellido} </td> <td>Documento: {documento} </td> <td>Fecha de ingreso: {fecha_ingreso} </td></tr>
+                    <tr> <td>Cargo: Programador Jr</td> <td>Nro Funcionario: {numero_funcionario}</td> <td>Fecha Liqudacion: {fecha_liquidacion} </td></tr>
+                    <tr> <td>Tipo: {tipo_trabajador} </td> <td>Oficina: Zonamerica</td> </tr>
+                </table>
+            </div>
+
+
+            <table border="0" width="100%" align="center">
+                <h5>Nominal</h5>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+                    <tr> <td>Concepto </td> <td>Cantidad</td> <td>Unitario</td> <td>Total</td></tr>
+
+                    <tr> <td>Horas Simples: </td> <td> {a} </td> <td> {b} </td> <td> {c} </td></tr>
+                    <tr> <td>Horas Extras: </td> <td> {d} </td> <td> {e} </td> <td> {f} </td></tr>
+                    <tr> <td>Horas Extras Especiales: </td> <td> {g} </td> <td> {h} </td> <td> {i} </td></tr>
+                    <tr> <td>Horas Nocturnas: </td> <td> {j} </td> <td> {k} </td> <td> {l} </td></tr>
+                    <tr> <td>Feriados Pago: </td> <td> {m} </td> <td> {n} </td> <td> {o} </td></tr>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+                    <tr> <td>TOTAL NOMINAL: </td> <td> </td> <td> </td> <td> {total_nominal} </td></tr>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+
+            </table>
+
+
+            <table border="0" width="100%" align="center">
+                <h5 >Descuentos</h5>
+            
+                    <tr> <td>Concepto </td> <td>Cantidad</td> <td>Total</td></tr>
+
+                    <tr> <td>BPS: </td> <td> {p} </td> <td> {q} </td> </tr>
+                    <tr> <td>FONASA: </td> <td> {r} </td> <td> {s} </td> </tr>
+                    <tr> <td>FRL: </td> <td> {t} </td> <td>{u}</td> </tr>
+                    <tr> <td>IRPF: </td> <td> </td> <td>{v} </td>  </tr>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+                    <tr> <td>TOTAL DESCUENTOS: </td> <td> </td> <td> </td> <td> {total_descuento} </td></tr>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+                    <tr> <td>LIQUIDO A COBRAR: </td> <td> </td> <td> </td> <td> {liquido} </td></tr>
+                    <tr> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td> <td> <hr> </td></tr>
+
+            </table>
+
+            <p>
+                <table>
+                    <p class="table-header">--- Via 1 ---</p>
+                    <p class="table-header">
+                    La empresa declara haber efectuado los aportes de seguridad social correspondientes
+                    a los haberes liquidados del mes anterior
+                    </p>
+                </table>
+            </p>
+
+            <table align="center" width="50%">
+                <h3 class="table-header">Firma de conformidad del trabajador</h3>
+                <p class="table-header">Recibi el importe mencionado y las copias correspondientes a la liquidacion</p>
+                <tr> <td>Fecha de Liquidacion: </td> <td> {fecha_liquidacion} </td></tr>
+                <tr> <td>Hora de Liquidacion: </td> <td> {hora_liquidacion} </td></tr>
+                <tr> <td>FIRMA: </td> <td>firma</td></tr>
+            </table>
+
+        </div>
+
+        </body>
+        </html> """.format(
+                nombre              = data[3],
+                apellido            = data[4],
+                documento           = data[5],
+                fecha_ingreso       = data[1], 
+                numero_funcionario  = data[0],
+                fecha_liquidacion   = 'fecha de hoy',
+                tipo_trabajador     = data[2],
+                a                   = self.hs_simples, 
+                b                   = self.calculo_hora(),  
+                c                   = jornales, 
+                d                   = self.hs_ext, 
+                e                   = self.calculo_hora(),  
+                f                   = totalextras, 
+                g                   = self.hs_ext_esp, 
+                h                   = self.calculo_hora(),  
+                i                   = totalEspeciales, 
+                j                   = self.hs_noct, 
+                k                   = self.calculo_hora(),  
+                l                   = totalNocturnas, 
+                m                   = self.jornada_esp,  
+                n                   = totalJornadaEspecial,  
+                o                   = totalJornadaEspecial, 
+                total_nominal       = nominalDescuento, 
+                p                   = "15%",  
+                q                   = descBPS, 
+                r                   = "4.5%",  
+                s                   = descFonasa, 
+                t                   = "0.125%",  
+                u                   = descFRL,  
+                v                   = irpf,  
+                total_descuento     = liquido1, 
+                liquido             = liquidoreal,  
+                hora_liquidacion    = hora2,) 
+                                    
+        print(totalEspeciales)
+
+        pdfkit.from_string(recibo, 'Recibos/{3}, recibo sueldo {0} {1}, Tipo: {2}, trabajador: {3}.pdf'.format(nombre, apellido, tipo, iD) )
+
+        exit()
+
+        
+
+
