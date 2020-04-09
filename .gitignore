@@ -2,3 +2,5 @@ env/
 requirements.txt
 test/
 Recibos/
+__pycache__/
+.vscode/
