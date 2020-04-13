@@ -108,16 +108,16 @@ class Trabajador:
         nominalDescuento = jornales + totalextras + totalEspeciales
 
         
-        print("================================")
-        print("Tipo de trabajador: ",self.tipo)
-        print("$xHora: ",hora)
-        print("Jornales: ", jornales)
-        print("Total Extras: ", totalextras)
-        print("Total Especiales: ", totalEspeciales)
-        print("Total Nocturnas: ", totalNocturnas)
-        print("Nominal Bruto: ", nominalBruto)
-        print("Nominal Descuento ", nominalDescuento)
-        print("================================")
+        #print("================================")
+        #print("Tipo de trabajador: ",self.tipo)
+        #print("$xHora: ",hora)
+        #print("Jornales: ", jornales)
+        #print("Total Extras: ", totalextras)
+        #print("Total Especiales: ", totalEspeciales)
+        #print("Total Nocturnas: ", totalNocturnas)
+        #print("Nominal Bruto: ", nominalBruto)
+        #print("Nominal Descuento ", nominalDescuento)
+        #print("================================")
         
 
         if nocturnas != 0:
@@ -377,11 +377,11 @@ class Trabajador:
                 liquido             = liquidoreal,  
                 hora_liquidacion    = hora2,) 
                                     
-        print(totalEspeciales)
+        #print(totalEspeciales)
 
         pdfkit.from_string(recibo, 'Recibos/{3}, recibo sueldo {0} {1}, Tipo: {2}, trabajador: {3}.pdf'.format(nombre, apellido, tipo, iD) )
 
-        exit()
+        #exit()
 
         
 

@@ -2,7 +2,8 @@ import sys
 import os
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import time
 import core
 from GUI.gui_baseDatos import Ui_root_gestor
@@ -28,8 +29,27 @@ def corroborarBooleanos(dato, dato1):
 
     return resultado, resultado2 #Esto retorna una tupla
 
+#Declaramos la clase Hilo1 donde se efectuara la liquidacion de la base de datos en segundo plano
+class Hilo1(QThread):
+
+    countChanged = pyqtSignal(int)
+    
+    def run(self):
+
+        global baseEjemplo
+        i = 0
+        while True:
+            if i >= len(baseEjemplo):
+                print("Base de datos Liquidada")
+                break
+            i+=1
+            time.sleep(1)
+            self.countChanged.emit(i)
+
+
 
 class MainGUI(QMainWindow):
+
     def __init__(self):
         super(QMainWindow, self).__init__()
         uic.loadUi("GUI/gui_raw.ui", self)
@@ -44,6 +64,7 @@ class MainGUI(QMainWindow):
         self.btn_liquidarIndividual.clicked.connect(self.liquidar_individual)
         self.btn_mostrarTrabajadores.clicked.connect(self.mostrarListado)
         self.btn_liquidarBaseDatos.clicked.connect(self.liquidar_base_datos)
+
 
         #Creamos el timer del reloj
         timer = QTimer(self)
@@ -66,7 +87,7 @@ class MainGUI(QMainWindow):
             minutosReloj = time.strftime("%M")
             segundosReloj = time.strftime("%S")
             horasReloj = time.strftime("%H")
-            print(hora2)
+            #print(hora2)
         return hora2
 
     def mostrarGestor(self):
@@ -200,12 +221,16 @@ class MainGUI(QMainWindow):
         self.checkBox.setChecked( corroborarBooleanos(dato=trabajador[14], dato1=trabajador[15])[1] )
 
     def liquidar_base_datos(self):
+        self.calc = Hilo1()
+        self.calc.countChanged.connect( self.__barra_progreso)
+        self.calc.start()
+    
+    def __barra_progreso(self, value):
+
         global baseEjemplo
         global datosUsuario
         global data
-
         self.progressBar.setMaximum(len(baseEjemplo))
-        i = 0
 
         if self.chbox_conyuge.isChecked():
             conyuge = True
@@ -216,14 +241,7 @@ class MainGUI(QMainWindow):
         else:
             conyuge_disc = False
 
-
-        while True:
-            if i >= len(baseEjemplo):
-                print("Base de datos Liquidada")
-                break
-            i+=1
-
-            for data in data_base.selectUnique(i):
+        for data in data_base.selectUnique(value):
                 self.txt_trabajadorID.setText( str(data[0]))
                 self.txt_fechaIngreso.setText( str(data[1]))
                 self.txt_tipoTrabajador.setText( str(data[2]))
@@ -237,11 +255,11 @@ class MainGUI(QMainWindow):
                 self.txt_discapacitados.setText( str(data[13]))
                 self.chbox_conyuge.setChecked( corroborarBooleanos(dato= data[14], dato1= data[15])[0] )
                 self.checkBox.setChecked( corroborarBooleanos(dato= data[14], dato1= data[15])[1] )
-                print(data)
+                #print(data)
 
-            self.progressBar.setValue(i)
+        self.progressBar.setValue(value)
 
-            obj = core.Trabajador(
+        obj = core.Trabajador(
                 identificador       = self.txt_trabajadorID.text(), 
                 fecha_ingreso       = self.txt_fechaIngreso.text(), 
                 tipo                = self.txt_tipoTrabajador.text(), 
@@ -257,39 +275,38 @@ class MainGUI(QMainWindow):
                 conyugeDisca        = conyuge_disc)
             
             
-            self.lbl_liquido.setText("$ " + str( round(obj.liquidar()[0]) ) )
-            self.txt_bps.setText( str( round(obj.liquidar()[1]) ) )
-            self.txt_fonasa.setText( str( round(obj.liquidar()[2]) ) )
-            self.txt_frl.setText( str( round(obj.liquidar()[3]) ) )
+        self.lbl_liquido.setText("$ " + str( round(obj.liquidar()[0]) ) )
+        self.txt_bps.setText( str( round(obj.liquidar()[1]) ) )
+        self.txt_fonasa.setText( str( round(obj.liquidar()[2]) ) )
+        self.txt_frl.setText( str( round(obj.liquidar()[3]) ) )
 
 
 
-            obj.reciboSueldo(
-                data                 = data,
-                jornales             = str( round(obj.liquidar()[3]) ),
-                totalextras          = str( round(obj.liquidar()[4]) ),
-                totalEspeciales      = str( round(obj.liquidar()[5]) ),
-                totalNocturnas       = str( round(obj.liquidar()[6]) ),
-                totalJornadaEspecial = str( round(obj.liquidar()[7]) ),
-                nominalDescuento     = str( round(obj.liquidar()[9]) ),
-                irpf                 = str( round(obj.liquidar()[10]) ),
-                liquidoreal          = str( round(obj.liquidar()[11]) ),
-                descBPS              = str( round(obj.liquidar()[0]) ),
-                descFonasa           = str( round(obj.liquidar()[1]) ),
-                descFRL              = str( round(obj.liquidar()[2]) ),
-                descGral             = str( round(obj.liquidar()[13]) ),
-                liquido1             = str( round(obj.liquidar()[12]) ),
-                hora2                = self.tick,
-                nombre               = data[3],
-                apellido             = data[4],
-                tipo                 = data[2],
-                iD                   = data[0]
-                )
+        obj.reciboSueldo(
+            data                 = data,
+            jornales             = str( round(obj.liquidar()[3]) ),
+            totalextras          = str( round(obj.liquidar()[4]) ),
+            totalEspeciales      = str( round(obj.liquidar()[5]) ),
+            totalNocturnas       = str( round(obj.liquidar()[6]) ),
+            totalJornadaEspecial = str( round(obj.liquidar()[7]) ),
+            nominalDescuento     = str( round(obj.liquidar()[9]) ),
+            irpf                 = str( round(obj.liquidar()[10]) ),
+            liquidoreal          = str( round(obj.liquidar()[11]) ),
+            descBPS              = str( round(obj.liquidar()[0]) ),
+            descFonasa           = str( round(obj.liquidar()[1]) ),
+            descFRL              = str( round(obj.liquidar()[2]) ),
+            descGral             = str( round(obj.liquidar()[13]) ),
+            liquido1             = str( round(obj.liquidar()[12]) ),
+            hora2                = self.tick,
+            nombre               = data[3],
+            apellido             = data[4],
+            tipo                 = data[2],
+            iD                   = data[0]
+            )
+        
+        obj.liquidar()
 
-            obj.liquidar()
-
-
-
+ 
 
 
 
