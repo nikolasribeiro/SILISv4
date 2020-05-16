@@ -7,4 +7,4 @@ En futuras actualizaciones ire añadiendo la posibilidad de programar las liquid
 
 Espero que les guste y sean libres de ver el codigo!
 
-NOTA: Para que el sistema funcione, es necesario crear una carpeta llamada "Recibos" en el mismo directorio donde descarguen los archivos. Esa carpeta es la carpeta destino donde se colocaran los recibos de sueldo que se liquiden, por el momento son archivos.txt pero estoy trabajando para generar archivos PDF con un diseño estandar.
+NOTA: Para que el sistema funcione, es necesario crear una carpeta llamada "Recibos" en el mismo directorio donde descarguen los archivos. Esa carpeta es la carpeta destino donde se colocaran los recibos de sueldo que se liquiden. Los recibos de sueldos se generaran en formato PDF.
