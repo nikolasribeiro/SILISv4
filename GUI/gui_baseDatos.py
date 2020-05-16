@@ -237,7 +237,7 @@ class Ui_root_gestor(object):
         self.retranslateUi(root_gestor)
         QtCore.QMetaObject.connectSlotsByName(root_gestor)
 
-        #Para desactivar, comenta esta linea
+        #Para desactivar, comenta la linea
         #self.__ingresarUsuarios()
 
         """ #============== CLASE DEFINIDA EN GESTOR_DATOS ==============# """
@@ -439,9 +439,13 @@ class Ui_root_gestor(object):
         global y
         tipos = 'Jornalero', 'Mensual'
         booleanos = True, False
-        for x in nombres.names:
-            for y in apellidos.apellidos:
-                self.txt_id.setText('5')
+        _id = 0
+
+        for x in src.nombres.names:
+            for y in src.apellidos.apellidos:
+                _id+=1
+                print("Esto vale id: ",_id)
+                self.txt_id.setText( str(_id) )
                 self.txt_fecha_ingreso.setText( "{}/{}/{}".format(random.randrange(1, 30, 1), random.randrange(1, 12, 1), random.randrange(2000, 2015, 1)) )
                 z = self.txt_tipo.setText( '{}'.format(random.choice(tipos)) )
                 self.txt_nombre.setText(x)
@@ -461,11 +465,13 @@ class Ui_root_gestor(object):
                 self.txt_hsNocturnas.setText( str(random.randrange(0,5,1)) )
                 self.txt_jornadaEsp.setText( '0' )
                 self.txt_hijosCargo.setText( str(random.randrange(0, 5)) )
-                self.lineEdit.setText( str(random.randrange(0,3)) ) #Hijos discapacitados
+                self.lineEdit.setText( str(random.randrange(0,5)) ) #Hijos discapacitados
                 self.rb_conyuge.setChecked( random.choice(booleanos) )
                 self.rb_conyugeDisca.setChecked( random.choice(booleanos) )
 
-                self.anadir()
+                if _id <= 100:
+                    self.anadir()
+
 
 
 

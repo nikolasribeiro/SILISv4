@@ -9,12 +9,16 @@ import core
 from GUI.gui_baseDatos import Ui_root_gestor
 import gestor_datos
 import DATABASE.data_base as data_base
+import threading
+
 
 baseEjemplo = data_base.getID()
 datosUsuario = data_base.displayInfo()
 recibo = ""
 hora1 = ""
 data = ""
+deposito_total = 0
+
 
 def corroborarBooleanos(dato, dato1):
     if dato == '1': #Trabajador[14] y 13, contienen los booleanos almacenados en la base de datos, las variables son temporales
@@ -40,23 +44,22 @@ class Hilo1(QThread):
         i = 0
         while True:
             if i >= len(baseEjemplo):
-                print("Base de datos Liquidada")
+                #print("Base de datos Liquidada")
                 break
             i+=1
             time.sleep(1)
             self.countChanged.emit(i)
 
-
-
 class MainGUI(QMainWindow):
 
+    
     def __init__(self):
         super(QMainWindow, self).__init__()
         uic.loadUi("GUI/gui_raw.ui", self)
 
         #Seteamos valor iniciales de grafica
-        self.txt_valorHora.setPlaceholderText("En caso MENSUAL, colocar Nominal")
-        self.txt_hs_simples.setPlaceholderText("En caso MENSUAL, colocar 0 (Cero)")
+        self.txt_valorHora.setPlaceholderText("MENSUAL colocar Nominal")
+        self.txt_hs_simples.setPlaceholderText("MENSUAL colocar 0")
         self.progressBar.setProperty("value", 0)
         self.lbl_liquido.setText("")
         self.lbl_depositoTrabajadores.setText("")
@@ -188,8 +191,6 @@ class MainGUI(QMainWindow):
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         #Ocultamos los encabezados verticales
         self.tableWidget.verticalHeader().setVisible(False)
-        #Dibujamos el fondo con colores alternados
-        self.tableWidget.setAlternatingRowColors(True)
         #Damos nombres a los headers
         nombre_encabezado = ('ID','Fecha Ingreso','Tipo Trabajador','Nombre','Apellido','Cedula','Valor Hora', 'Horas Simples', 'Horas Extras', 'Hs Ext. Especiales', 'Horas Nocturnas', 'Jornada Especial', 'Hijos a Cargo', 'Hijos Discapacitados', 'Conyuge a Cargo', 'Conyuge a Cargo Discapacitado',)
         self.tableWidget.setHorizontalHeaderLabels(nombre_encabezado)
@@ -274,7 +275,7 @@ class MainGUI(QMainWindow):
                 conyuge             = conyuge, 
                 conyugeDisca        = conyuge_disc)
             
-            
+        
         self.lbl_liquido.setText("$ " + str( round(obj.liquidar()[0]) ) )
         self.txt_bps.setText( str( round(obj.liquidar()[1]) ) )
         self.txt_fonasa.setText( str( round(obj.liquidar()[2]) ) )
@@ -305,11 +306,12 @@ class MainGUI(QMainWindow):
             )
         
         obj.liquidar()
+        self.calculo_deposito( round(obj.liquidar()[0]) )
 
- 
-
-
-
+    def calculo_deposito(self, sueldo):
+        global deposito_total
+        deposito_total += sueldo
+        self.lbl_depositoTrabajadores.setText("$ " + str( deposito_total ) ) 
 
 
 if __name__ == '__main__':

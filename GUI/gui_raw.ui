@@ -18,495 +18,529 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1359</width>
-    <height>765</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>SILIS v4</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QProgressBar:chunk
+{
+background-color: #21e6c1;
+}
+
+QPushButton
+{
+color:white;
+background:#1f4287;
+}
+
+QLabel{
+color:white;
+}
+
+QLineEdit
+{
+color:white;
+border: 1px solid white;
+border-radius: 10px;
+}
+
+QRadioButton, QCheckBox
+{
+color:white;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame_inputs">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>401</width>
-      <height>751</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(24, 135, 157);</string>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+    <property name="rightMargin">
+     <number>0</number>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
-    <widget class="QWidget" name="formLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>381</width>
-       <height>328</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="FormLayout_inputs">
-      <property name="verticalSpacing">
-       <number>8</number>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0" rowspan="2">
+     <widget class="QFrame" name="frame_inputs">
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>16777215</height>
+       </size>
       </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lbl_trabajadorID">
-        <property name="text">
-         <string>Trabajador ID</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="txt_trabajadorID">
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lbl_fechaIngreso">
-        <property name="text">
-         <string>Fecha de Ingreso</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="txt_fechaIngreso"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="lbl_TipoTrab">
-        <property name="text">
-         <string>Tipo de Trabajador</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="txt_tipoTrabajador"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lbl_valorHora">
-        <property name="text">
-         <string>Valor de la Hora</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="txt_valorHora"/>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="lbl_horasSimples">
-        <property name="text">
-         <string>Horas Simples</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="txt_hs_simples"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="lbl_horasExtras">
-        <property name="text">
-         <string>Horas Extras</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="txt_hs_Ext"/>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="lbl_horas_ext_esp">
-        <property name="text">
-         <string>Horas Extras Especiales</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="txt_hs_ext_esp"/>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="lbl_horasNoc">
-        <property name="text">
-         <string>Horas Nocturnas</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QLineEdit" name="txt_horas_noc"/>
-      </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="lbl_jornada_esp">
-        <property name="text">
-         <string>Jornada Especial</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="QLineEdit" name="txt_jornadaEsp"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>5</y>
-       <width>191</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
-font: 10pt &quot;Sans Serif&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Datos del Trabajador</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>340</y>
-       <width>91</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
-font: 10pt &quot;Sans Serif&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Deducciones</string>
-     </property>
-    </widget>
-    <widget class="Line" name="line">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>320</y>
-       <width>381</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QWidget" name="formLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>370</y>
-       <width>381</width>
-       <height>242</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="lbl_BPS">
-        <property name="text">
-         <string>BPS</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="txt_bps"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lbl_fonasa">
-        <property name="text">
-         <string>FONASA</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="txt_fonasa"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="lbl_frl">
-        <property name="text">
-         <string>FRL</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="txt_frl"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lbl_hijosCargo">
-        <property name="text">
-         <string>Hijos a Cargo</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="txt_hijos"/>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="lbl_discapacitados">
-        <property name="text">
-         <string>Discapacitados</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="txt_discapacitados"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="lbl_conyuge">
-        <property name="text">
-         <string>Conyuge a cargo</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="lbl_cony_disca">
-        <property name="text">
-         <string>Conyuge Discapacitado</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="1">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>Si</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QRadioButton" name="chbox_conyuge">
-        <property name="text">
-         <string>Si</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="btn_liquidarIndividual">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>650</y>
-       <width>381</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Liquidar Individual</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_monitor_tabla">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>0</y>
-      <width>961</width>
-      <height>431</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(19, 163, 206);</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>941</width>
-       <height>401</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QFrame" name="frame_botonesYcontroladores">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>430</y>
-      <width>961</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(11, 179, 197);</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QPushButton" name="btn_mostrarTrabajadores">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>220</y>
-       <width>271</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Mostrar Trabajadores</string>
-     </property>
-    </widget>
-    <widget class="Line" name="line_2">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>220</y>
-       <width>21</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btn_liquidarBaseDatos">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>220</y>
-       <width>341</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Liquidar todos los Trabajadores</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>680</x>
-       <y>220</y>
-       <width>271</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(182, 255, 11);</string>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-     <property name="textVisible">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QWidget" name="gridLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>941</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QLabel" name="lbl_liquido">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
+      <property name="styleSheet">
+       <string notr="true">background-color: #071e3d;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QFrame" name="frame_datos_trabajador">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <property name="verticalSpacing">
+             <number>8</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="lbl_trabajadorID">
+              <property name="text">
+               <string>Trabajador ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="txt_trabajadorID">
+              <property name="placeholderText">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lbl_fechaIngreso">
+              <property name="text">
+               <string>Fecha de Ingreso</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="txt_fechaIngreso"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lbl_TipoTrab">
+              <property name="text">
+               <string>Tipo de Trabajador</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="txt_tipoTrabajador"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lbl_valorHora">
+              <property name="text">
+               <string>Valor de la Hora</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="txt_valorHora"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lbl_horasSimples">
+              <property name="text">
+               <string>Horas Simples</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="txt_hs_simples"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="lbl_horasExtras">
+              <property name="text">
+               <string>Horas Extras</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="txt_hs_Ext"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="lbl_horas_ext_esp">
+              <property name="text">
+               <string>Horas Extras Especiales</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="txt_hs_ext_esp"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="lbl_horasNoc">
+              <property name="text">
+               <string>Horas Nocturnas</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="txt_horas_noc"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="lbl_jornada_esp">
+              <property name="text">
+               <string>Jornada Especial</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="txt_jornadaEsp"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_deducciones">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lbl_BPS">
+              <property name="text">
+               <string>BPS</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="txt_bps"/>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lbl_fonasa">
+              <property name="text">
+               <string>FONASA</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="txt_fonasa"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lbl_frl">
+              <property name="text">
+               <string>FRL</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="txt_frl"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="lbl_hijosCargo">
+              <property name="text">
+               <string>Hijos a Cargo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="txt_hijos"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lbl_discapacitados">
+              <property name="text">
+               <string>Discapacitados</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="txt_discapacitados"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="lbl_conyuge">
+              <property name="text">
+               <string>Conyuge a cargo</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QRadioButton" name="chbox_conyuge">
+              <property name="text">
+               <string>Si</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="lbl_cony_disca">
+              <property name="text">
+               <string>Conyuge Discapacitado</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QCheckBox" name="checkBox">
+              <property name="text">
+               <string>Si</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_btn_individual">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>90</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="btn_liquidarIndividual">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#1f4287;</string>
+            </property>
+            <property name="text">
+             <string>Liquidar Individual</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QFrame" name="frame_monitor_tabla">
+      <property name="styleSheet">
+       <string notr="true">background-color: #1f4287;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="styleSheet">
+          <string notr="true">background-color:white;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QFrame" name="frame_botonesYcontroladores">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>210</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #071e3d;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="1">
+          <widget class="QLabel" name="lbl_liquido">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
 font: 30pt &quot;Sans Serif&quot;;</string>
-        </property>
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
 font: 16pt &quot;Sans Serif&quot;;</string>
-        </property>
-        <property name="text">
-         <string>LIQUIDO:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
+           </property>
+           <property name="text">
+            <string>LIQUIDO:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
 font: 18pt &quot;Sans Serif&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Total deposito a los Trabajadores:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="lbl_depositoTrabajadores">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
+           </property>
+           <property name="text">
+            <string>Total deposito a los Trabajadores:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="lbl_depositoTrabajadores">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);
 font: 30pt &quot;Sans Serif&quot;;</string>
-        </property>
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="Line" name="line_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>200</y>
-       <width>941</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="Line" name="line_4">
-     <property name="geometry">
-      <rect>
-       <x>650</x>
-       <y>220</y>
-       <width>21</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </widget>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="btn_mostrarTrabajadores">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#1f4287;</string>
+            </property>
+            <property name="text">
+             <string>Mostrar Trabajadores</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_liquidarBaseDatos">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>70</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background:#1f4287;</string>
+            </property>
+            <property name="text">
+             <string>Liquidar todos los Trabajadores</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #071e3d;</string>
+            </property>
+            <property name="value">
+             <number>24</number>
+            </property>
+            <property name="textVisible">
+             <bool>false</bool>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -514,7 +548,7 @@ font: 30pt &quot;Sans Serif&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>1359</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuGestionar_Base_de_Datos">
